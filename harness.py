@@ -6,7 +6,7 @@ from __future__ import print_function
 import os
 import string
 import time
-import thread
+import threading
 
 import fedmsg
 import fedmsg.config
@@ -67,7 +67,9 @@ if __name__ == '__main__':
                     writelatest(domain, package[1])
                     dom32 = domain + '32'
                     dom64 = domain + '64'
+                    t1 = threading.Thread(name=dom32, target=launchdomain, args=(dom32,))
+                    t2 = threading.Thread(name=dom64, target=launchdomain, args=(dom64,))
                     print("starting domain %s" % (dom32))
-                    thread.start_new(launchdomain, (dom32,))
+                    t1.start()
                     print("starting domain %s" % (dom64))
-                    thread.start_new(launchdomain, (dom64,))
+                    t2.start()
