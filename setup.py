@@ -29,5 +29,5 @@ setup(
     install_requires=[
         'Flask', 'SQLAlchemy>=0.6', 'wtforms', 'flask-wtf',
         'python-fedora', 'python-openid', 'python-openid-teams',
-        'python-openid-cla'],
+        'python-openid-cla', 'six'],
 )
