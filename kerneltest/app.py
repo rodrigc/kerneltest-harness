@@ -14,6 +14,7 @@ from flask.ext.fas_openid import FAS
 from flask.ext import wtf as flask_wtf
 from flask.ext.wtf import file as wtf_file
 from sqlalchemy.exc import SQLAlchemyError
+import six
 
 import kerneltest.dbtools as dbtools
 
@@ -171,7 +172,7 @@ def is_admin(user):
         return False
 
     admins = APP.config['ADMIN_GROUP']
-    if isinstance(admins, basestring):
+    if isinstance(admins, six.string_types):
         admins = [admins]
     admins = set(admins)
 
@@ -478,7 +479,7 @@ def login():
         return flask.redirect(return_point)
     else:
         admins = APP.config['ADMIN_GROUP']
-        if isinstance(admins, basestring):
+        if isinstance(admins, six.string_types):
             admins = [admins]
         return FAS.login(
             return_url=return_point, groups=admins)
